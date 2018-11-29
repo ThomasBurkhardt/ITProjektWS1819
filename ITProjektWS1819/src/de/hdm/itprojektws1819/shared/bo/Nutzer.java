@@ -9,22 +9,22 @@ public class Nutzer extends BusinessObject {
 	/**
 	 * Vorname des Nutzers
 	 */
-	private String vorname = null;
+	private String vorname = "";
 
 	/**
 	 * Nachname des Nutzers
 	 */
-	private String nachname = null;
+	private String nachname = "";
 
 	/**
 	 * Nickname des Nutzers
 	 */
-	private String nickname = null;
+	private String nickname = "";
 
 	/**
 	 * Email-Adresse des Nutzers
 	 */
-	private String email = null;
+	private String email = "";
 
 	/**
 	 * Erstellungszeitpunkt des Nutzers
