@@ -240,7 +240,7 @@ public class NutzerMapper {
 	}
 	
 	/**
-	 * Einfügen eines <code>Nutzerobjekt</code>-Objects in die Datenbank.
+	 * Einfügen eines <code>Nutzer</code>-Objekts in die Datenbank.
 	 * 
 	 * @param n
 	 * @return das bereits übergebene Objekt jedoch mit ggf. korrigierter <code>id</code>.
@@ -259,8 +259,9 @@ public class NutzerMapper {
 				
 				stmt = con.createStatement();
 				
-				stmt.executeUpdate("INSERT INTO nutzer (nutzerID, vorname, nachname, nickname, email, erstellungszeitpunkt) "
-						+ "VALUES (" + n.getId() + ",'" + n.getId() + "','" + n.getVorname() + "','"
+				// id muss evtl. in nutzerID geändert werden
+				stmt.executeUpdate("INSERT INTO nutzer (id, vorname, nachname, nickname, email, erstellungszeitpunkt) "
+						+ "VALUES (" + n.getId() + "','" + n.getVorname() + "','"
 						+ n.getNachname() + "','" + n.getNickname() + "','" + n.getEmail() + "','"
 						+ n.getErstellungszeitpunkt() + "')");
 			}
