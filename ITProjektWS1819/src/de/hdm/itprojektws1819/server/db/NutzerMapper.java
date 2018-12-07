@@ -39,6 +39,7 @@ public class NutzerMapper {
 			Statement stmt = con.createStatement();
 
 			// Statement ausfüllen und als Query an die DB schicken
+			// Order By unwichtig
 			ResultSet rs = stmt.executeQuery("SELECT id, vorname, nachname, nickname, "
 					+ "email, erstellungszeitpunkt FROM nutzer " + "WHERE id=" + id + " ORDER BY nachname");
 
@@ -296,7 +297,7 @@ public class NutzerMapper {
 	}
 	
 	/**
-	 * Löschen der Daten eines <code>Nutzer</code>-Bojekts aus der Datenbank
+	 * Löschen der Daten eines <code>Nutzer</code>-Objekts aus der Datenbank
 	 * 
 	 * @param n
 	 * 			das aus der DB zu löschende "Objekt"
