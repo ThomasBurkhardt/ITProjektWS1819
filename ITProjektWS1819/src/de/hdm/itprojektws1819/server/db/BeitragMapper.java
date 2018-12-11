@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import de.hdm.itprojektws1819.shared.bo.Beitrag;
-import de.hdm.itprojektws1819.shared.bo.Nutzer;
 
 public class BeitragMapper {
 
@@ -67,12 +66,12 @@ public class BeitragMapper {
 	}
 	
 	/**
-	 * Vector-Methode muss angepasst werden Suchen eines Beitrags über den
+	 * Vector-Methode muss angepasst werden. Suchen eines Beitrags über den
 	 * vorgegebenen Fremdschlüssel.
 	 * 
 	 * @param nutzerID
-	 * @return Beitrag-Objekt, das dem übergebenen Fremdschlüssel entspricht,
-	 *         null bei nicht vorhandenem DB-Tupel
+	 * @return Vector mit Beitrag-Objekten, die sämtliche Beiträge mit gesuchtem
+	 *         Fremdschlüssel repräsentieren,
 	 */
 	public Vector<Beitrag> findBeitragByNutzerID(int nutzerID) {
 		Connection con = DBConnection.connection();
@@ -84,7 +83,7 @@ public class BeitragMapper {
 
 			// Statement ausfüllen und als Query an die DB schicken
 			// Order By unwichtig
-			ResultSet rs = stmt.executeQuery("SELECT id, erstellungszeitpunkt, pinnwandID, nutzerID" + "FROM Beitrag "
+			ResultSet rs = stmt.executeQuery("SELECT id, erstellungszeitpunkt, pinnwandID, nutzerID" + "FROM beitrag "
 					+ "WHERE nutzerID=" + nutzerID + "ORDER BY nutzerID");
 
 			// Für jeden Eintrag im Suchergebnis wird nun ein Beitrag-Objekt

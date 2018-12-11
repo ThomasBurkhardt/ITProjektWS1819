@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 import de.hdm.itprojektws1819.shared.bo.Kommentar;
 
@@ -20,6 +21,88 @@ public class KommentarMapper {
 		}
 		
 		return kommentarMapper;
+	}
+
+	/**
+	 * Suchen eines Kommentars über die vorgegebene Id. Da diese eindeutig ist,
+	 * wird genau ein Objekt zurückgegeben.
+	 * 
+	 * @param id
+	 * @return Kommentar-Objekt, das dem übergebenen Schlüssel entspricht, null
+	 *         bei nicht vorhandenem DB-Tupel
+	 */
+	public Kommentar findKommentarByID(int id) {
+		Connection con = DBConnection.connection();
+
+		try {
+			// Leeres SQL-Statement (JDBC) anlegen
+			Statement stmt = con.createStatement();
+
+			// Statement ausfüllen und als Query an die DB schicken
+			ResultSet rs = stmt.executeQuery("SELECT id, beitragID, erstellungszeitpunkt" + "FROM kommentar "
+					+ "WHERE id=" + id + " ORDER BY id");
+
+			/*
+			 * Da id Primärschlüssel ist, kann max. nur ein Tupel zurückgegeben
+			 * werden. Prüfe, ob ein Ergebnis vorliegt.
+			 */
+			if (rs.next()) {
+				// Ergebnis-Tupel in Objekt umwandeln
+				Kommentar k = new Kommentar();
+				k.setId(rs.getInt("id"));
+				k.setBeitragID(rs.getInt("beitragID"));
+				k.setErstellungszeitpunkt(rs.getDate("erstellungszeitpunkt"));
+
+				return k;
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+	
+	/**
+	 * Vector-Methode muss angepasst werden. Suchen eines Kommentars über den
+	 * vorgegebenen Fremdschlüssel.
+	 * 
+	 * @param beitragID
+	 * @return Vector mit Kommentar-Objekten, die sämtliche Kommentare mit
+	 *         gesuchtem Fremdschlüssel repräsentieren.
+	 */
+	public Vector<Kommentar> findKommentarByBeitragID(int beitragID) {
+		Connection con = DBConnection.connection();
+		Vector<Kommentar> result = new Vector<Kommentar>();
+
+		try {
+			// Leeres SQL-Statement (JDBC) anlegen
+			Statement stmt = con.createStatement();
+
+			// Statement ausfüllen und als Query an die DB schicken
+			ResultSet rs = stmt.executeQuery("SELECT id, beitragID, erstellungszeitpunkt" + "FROM kommentar "
+					+ "WHERE beitragID=" + beitragID + "ORDER BY beitragID");
+
+			// Für jeden Eintrag im Suchergebnis wird nun ein Kommentar-Objekt
+			// erstellt
+			while (rs.next()) {
+				Kommentar k = new Kommentar();
+				k.setId(rs.getInt("id"));
+				k.setBeitragID(rs.getInt("beitragID"));
+				k.setErstellungszeitpunkt(rs.getDate("erstellungszeitpunkt"));
+
+				// Hinzufügen des neuen Objekts zum Ergebnisvektor
+				result.addElement(k);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+
 	}
 	
 	/**
