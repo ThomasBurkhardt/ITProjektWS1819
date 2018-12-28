@@ -2,7 +2,7 @@ package de.hdm.itprojektws1819.shared.bo;
 
 import java.util.Date;
 
-public class Beitrag extends Textdokument {
+public class Beitrag extends BusinessObject {
 
 	private static final long serialVersionUID = 1L;
 
@@ -10,6 +10,11 @@ public class Beitrag extends Textdokument {
 	 * Erstellungszeitpunkt des Beitrags
 	 */
 	private Date erstellungszeitpunkt = new Date();
+
+	/**
+	 * Inhalt des Beeitrags
+	 */
+	private String beitragInhalt = "";
 
 	/**
 	 * Fremdschlüsselbeziehung zur Pinnwand
@@ -33,6 +38,24 @@ public class Beitrag extends Textdokument {
 	 */
 	public void setErstellungszeitpunkt(Date erstellungszeitpunkt) {
 		this.erstellungszeitpunkt = erstellungszeitpunkt;
+	}
+
+	/**
+	 * Auslesen des Beitraginhalts
+	 * 
+	 * @return beitragInhalt
+	 */
+	public String getBeitragInhalt() {
+		return beitragInhalt;
+	}
+
+	/**
+	 * Setzen des Beitraginhalts
+	 * 
+	 * @param beitragInhalt
+	 */
+	public void setBeitragInhalt(String beitragInhalt) {
+		this.beitragInhalt = beitragInhalt;
 	}
 
 	/**
