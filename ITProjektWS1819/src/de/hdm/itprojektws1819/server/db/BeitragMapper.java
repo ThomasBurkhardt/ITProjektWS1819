@@ -40,7 +40,7 @@ public class BeitragMapper {
 
 			// Statement ausfüllen und als Query an die DB schicken
 			ResultSet rs = stmt.executeQuery(
-					"SELECT id, erstellungszeitpunkt, pinnwandID  FROM beitrag " + "WHERE id=" + id + " ORDER BY id");
+					"SELECT id, erstellungszeitpunkt, beitragInhalt, pinnwandID  FROM beitrag " + "WHERE id=" + id + " ORDER BY id");
 
 			/*
 			 * Da id Primärschlüssel ist, kann max. nur ein Tupel zurückgegeben
@@ -51,6 +51,7 @@ public class BeitragMapper {
 				Beitrag b = new Beitrag();
 				b.setId(rs.getInt("id"));
 				b.setErstellungszeitpunkt(rs.getDate("erstellungszeitpunkt"));
+				b.setBeitragInhalt(rs.getString("beitragInhalt"));
 				b.setPinnwandID(rs.getInt("pinnwandID"));
 
 				return b;
@@ -83,7 +84,7 @@ public class BeitragMapper {
 
 			// Statement ausfüllen und als Query an die DB schicken
 			// Order By unwichtig
-			ResultSet rs = stmt.executeQuery("SELECT id, erstellungszeitpunkt, pinnwandID, nutzerID" + "FROM beitrag "
+			ResultSet rs = stmt.executeQuery("SELECT id, erstellungszeitpunkt, beitragInhalt, pinnwandID, nutzerID" + "FROM beitrag "
 					+ "WHERE nutzerID=" + nutzerID + "ORDER BY nutzerID");
 
 			// Für jeden Eintrag im Suchergebnis wird nun ein Beitrag-Objekt
@@ -92,6 +93,7 @@ public class BeitragMapper {
 				Beitrag b = new Beitrag();
 				b.setId(rs.getInt("id"));
 				b.setErstellungszeitpunkt(rs.getDate("erstellungszeitpunkt"));
+				b.setBeitragInhalt(rs.getString("beitragInhalt"));
 				b.setPinnwandID(rs.getInt("pinnwandID"));
 				b.setNutzerID(rs.getInt("nutzerID"));
 
@@ -133,8 +135,10 @@ public class BeitragMapper {
 				stmt = con.createStatement();
 
 				// TEXT EVTL. ALS ATTRIBUT und Beitragsklasse überarbeiten
-				stmt.executeUpdate("INSERT INTO beitrag (id, pinnwandID) " + "VALUES (" + b.getId() + ","
-						+ b.getPinnwandID() + ")");
+				stmt.executeUpdate(
+						"INSERT INTO beitrag (id, erstellungszeitpunkt, beitragInhalt, pinnwandID, nutzerID) "
+								+ "VALUES (" + b.getId() + "," + b.getErstellungszeitpunkt() + ","
+								+ b.getBeitragInhalt() + "," + b.getPinnwandID() + "," + b.getNutzerID() + ")");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
