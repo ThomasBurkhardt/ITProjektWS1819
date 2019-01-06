@@ -12,7 +12,7 @@ public class Beitrag extends BusinessObject {
 	private Date erstellungszeitpunkt = new Date();
 
 	/**
-	 * Inhalt des Beeitrags
+	 * Inhalt des Beitrags
 	 */
 	private String beitragInhalt = "";
 

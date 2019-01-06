@@ -113,10 +113,8 @@ public class KommentarMapper {
 	 * @param k
 	 * @return das bereits übergebene Objekt jedoch mit ggf. korrigierter
 	 *         <code>id</code>.
-	 * 
-	 *         !!!!! TEXT WIRD EVTL. NOCH HINZUGEFÜGT !!!!!!
 	 */
-	public Kommentar createKommentarMapper(Kommentar k) {
+	public Kommentar createKommentar(Kommentar k) {
 		Connection con = DBConnection.connection();
 
 		try {

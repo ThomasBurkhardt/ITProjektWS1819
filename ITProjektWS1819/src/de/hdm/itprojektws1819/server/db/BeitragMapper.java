@@ -40,7 +40,7 @@ public class BeitragMapper {
 
 			// Statement ausfüllen und als Query an die DB schicken
 			ResultSet rs = stmt.executeQuery(
-					"SELECT id, erstellungszeitpunkt, beitragInhalt, pinnwandID  FROM beitrag " + "WHERE id=" + id + " ORDER BY id");
+					"SELECT id, erstellungszeitpunkt, beitragInhalt, pinnwandID, nutzerID FROM beitrag " + "WHERE id=" + id + " ORDER BY id");
 
 			/*
 			 * Da id Primärschlüssel ist, kann max. nur ein Tupel zurückgegeben
@@ -53,6 +53,7 @@ public class BeitragMapper {
 				b.setErstellungszeitpunkt(rs.getDate("erstellungszeitpunkt"));
 				b.setBeitragInhalt(rs.getString("beitragInhalt"));
 				b.setPinnwandID(rs.getInt("pinnwandID"));
+				b.setNutzerID(rs.getInt("nutzerID"));
 
 				return b;
 
@@ -110,15 +111,12 @@ public class BeitragMapper {
 	}
 	
 	
-	
 	/**
 	 * Einfügen eines <code>Beitrag</code>-Objekts in die Datenbank.
 	 * 
 	 * @param b
 	 * @return das bereits übergebene Objekt jedoch mit ggf. korrigierter
 	 *         <code>id</code>.
-	 * 
-	 *         !!!!! TEXT WIRD EVTL. NOCH HINZUGEFÜGT !!!!!!
 	 */
 	public Beitrag createBeitrag(Beitrag b) {
 		Connection con = DBConnection.connection();
@@ -134,7 +132,6 @@ public class BeitragMapper {
 
 				stmt = con.createStatement();
 
-				// TEXT EVTL. ALS ATTRIBUT und Beitragsklasse überarbeiten
 				stmt.executeUpdate(
 						"INSERT INTO beitrag (id, erstellungszeitpunkt, beitragInhalt, pinnwandID, nutzerID) "
 								+ "VALUES (" + b.getId() + "," + b.getErstellungszeitpunkt() + ","
@@ -159,8 +156,9 @@ public class BeitragMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate(
-					"UPDATE beitrag " + "SET pinnwandID=\"" + b.getPinnwandID() + "\" " + "WHERE id =" + b.getId());
+			stmt.executeUpdate("UPDATE beitrag " + "SET erstellungszeitpunkt=\"" + b.getErstellungszeitpunkt()
+					+ "beitragInhalt=\"" + b.getBeitragInhalt() + "\", " + "pinnwandID=\"" + b.getPinnwandID()
+					+ "nutzerID=\"" + b.getNutzerID() + "\" " + "WHERE id =" + b.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
