@@ -1,5 +1,7 @@
 package de.hdm.itprojektws1819.shared;
 
+import java.util.Vector;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojektws1819.shared.bo.Abonnement;
@@ -41,5 +43,15 @@ public interface SocialMediaAdminAsync {
 	void deleteKommentar(Kommentar k, AsyncCallback<Void> callback);
 
 	void deleteAbonnement(Abonnement a, AsyncCallback<Void> callback);
+
+	void findNutzerByID(int nutzerID, AsyncCallback<Nutzer> callback);
+
+	void findNutzerByVorname(String vorname, AsyncCallback<Vector<Nutzer>> callback);
+
+	void findNutzerByNachname(String nachname, AsyncCallback<Vector<Nutzer>> callback);
+
+	void findNutzerByNickname(String nickname, AsyncCallback<Vector<Nutzer>> callback);
+
+	void findAllNutzer(AsyncCallback<Vector<Nutzer>> callback);
 
 }

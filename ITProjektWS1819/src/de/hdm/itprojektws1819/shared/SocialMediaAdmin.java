@@ -1,5 +1,7 @@
 package de.hdm.itprojektws1819.shared;
 
+import java.util.Vector;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -87,5 +89,16 @@ public interface SocialMediaAdmin extends RemoteService {
 	public void deleteKommentar(Kommentar k) throws IllegalArgumentException;
 	
 	public void deleteAbonnement(Abonnement a) throws IllegalArgumentException;
-		
+	
+	public Nutzer findNutzerByID(int nutzerID) throws IllegalArgumentException;
+	
+	public Vector<Nutzer> findNutzerByVorname(String vorname) throws IllegalArgumentException;
+	
+	public Vector<Nutzer> findNutzerByNachname(String nachname) throws IllegalArgumentException;
+	
+	public Vector<Nutzer> findNutzerByNickname(String nickname) throws IllegalArgumentException;
+	
+	public Vector<Nutzer> findAllNutzer() throws IllegalArgumentException;
+	
+	
 }
