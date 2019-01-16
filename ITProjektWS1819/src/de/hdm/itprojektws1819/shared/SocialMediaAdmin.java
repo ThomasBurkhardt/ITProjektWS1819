@@ -100,5 +100,22 @@ public interface SocialMediaAdmin extends RemoteService {
 	
 	public Vector<Nutzer> findAllNutzer() throws IllegalArgumentException;
 	
+	public Pinnwand findPinnwandByID(int pinnwandID) throws IllegalArgumentException;
+	
+	public Pinnwand findPinnwandByNutzerID(int nutzerID) throws IllegalArgumentException;
+	
+	public Beitrag findBeitragByID(int beitragID) throws IllegalArgumentException;
+	
+	public Vector<Beitrag> findBeitragByNutzerID(int nutzerID) throws IllegalArgumentException;
+	
+	public Kommentar findKommentarByID(int kommentarID) throws IllegalArgumentException;
+	
+	public Vector<Kommentar> findKommentarByBeitragID(int beitragID) throws IllegalArgumentException;
+	
+	public Abonnement findAbonnementByID(int abonnemenetID) throws IllegalArgumentException;
+	
+	public Vector<Abonnement> findAbonnementByNutzerID(int nutzerID) throws IllegalArgumentException;
+	
+	public Vector<Abonnement> findAbonnementByPinnwandID(int pinnwandID) throws IllegalArgumentException;
 	
 }
